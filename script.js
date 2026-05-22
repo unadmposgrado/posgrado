@@ -646,7 +646,7 @@
   function mostrarDoctoradoAsignaturas() {
     const contenedor = document.getElementById('contenidoDinamico');
     const asignaturas = [
-      { texto: 'El modelo didáctico como eje para la mediación del aprendizaje', principal: true },
+      { texto: 'Mediación del aprendizaje', principal: true },
       { texto: 'Asignatura 2' },
       { texto: 'Asignatura 3' },
       { texto: 'Asignatura 4' }
