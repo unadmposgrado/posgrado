@@ -202,6 +202,12 @@
   .nav-btn.primary:hover { background: #2a2a4a; }
   .nav-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
   .nav-section-divider { height: 8px; }
+  .sidebar-left.asignatura-menu-collapsed .asignatura-divider {
+    display: none;
+  }
+  .asignatura-menu-hidden {
+    display: none;
+  }
 
   /* Unit header styling */
   .unit-header {
@@ -382,6 +388,33 @@
   .content-card {
     background: white;
     padding: 20px;
+  }
+
+  .asignatura-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: -4px 0 14px;
+    color: #66707a;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .asignatura-breadcrumb span {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .asignatura-breadcrumb span:not(:last-child)::after {
+    content: "/";
+    margin-left: 6px;
+    color: #a0a7ae;
+  }
+
+  .asignatura-breadcrumb span:last-child {
+    color: #3f4a54;
+    font-weight: 600;
   }
 
   .unidad-badge {
@@ -618,6 +651,433 @@
     height: auto;
   }
 
+  .cursos-content {
+    padding: 0;
+    background: #fff;
+  }
+
+  .mis-cursos-view {
+    padding: 16px 16px 24px;
+    color: #1f2328;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .mis-cursos-header {
+    padding-bottom: 18px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .mis-cursos-header h2 {
+    margin: 0 0 14px;
+    color: #1f2328;
+    font-size: 34px;
+    line-height: 1.08;
+    font-weight: 700;
+  }
+
+  .mis-cursos-header p {
+    margin: 0 0 20px;
+    color: #15191d;
+    font-size: 24px;
+    line-height: 1.25;
+    font-weight: 600;
+    text-align: left;
+  }
+
+  .mis-cursos-actions,
+  .cursos-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .curso-btn,
+  .curso-select,
+  .curso-sort {
+    min-height: 46px;
+    border: 1px solid #9ba7b0;
+    border-radius: 8px;
+    background: #fff;
+    color: #315f7d;
+    cursor: pointer;
+    font: inherit;
+    font-size: 18px;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .curso-btn {
+    padding: 0 15px;
+  }
+
+  .curso-btn-outline {
+    border-color: #315f7d;
+  }
+
+  .curso-btn-primary {
+    border-color: #2b74bd;
+    background: #2b74bd;
+    color: #fff;
+  }
+
+  .cursos-filter-bar {
+    display: grid;
+    grid-template-columns: minmax(88px, 104px) minmax(170px, 1fr) minmax(230px, 290px) minmax(96px, 110px);
+    gap: 10px;
+    margin: 20px 0 16px;
+  }
+
+  .curso-select,
+  .curso-sort {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    color: #6f7378;
+  }
+
+  .curso-search input {
+    width: 100%;
+    min-height: 46px;
+    border: 1px solid #b8bdc2;
+    border-radius: 8px;
+    padding: 0 16px;
+    color: #1f2328;
+    font: inherit;
+    font-size: 18px;
+  }
+
+  .curso-search input::placeholder {
+    color: #6f7378;
+    opacity: 1;
+  }
+
+  .cursos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+    gap: 10px;
+  }
+
+  .curso-card {
+    display: block;
+    overflow: hidden;
+    min-height: 310px;
+    border: 1px solid #d7d7d7;
+    border-radius: 8px;
+    background: #fff;
+    color: inherit;
+    text-decoration: none;
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+
+  .curso-card:hover,
+  .curso-card:focus-within,
+  .curso-card-link:focus-visible {
+    border-color: #7ca7c8;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(31, 61, 91, 0.18);
+  }
+
+  .curso-card-link {
+    cursor: pointer;
+    outline: none;
+  }
+
+  .curso-card-link:focus-visible {
+    outline: 3px solid rgba(43, 116, 189, 0.35);
+    outline-offset: 3px;
+  }
+
+  .curso-card-cover {
+    height: 138px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .curso-card-cover-gray {
+    background:
+      linear-gradient(60deg, transparent 48%, rgba(255, 255, 255, 0.42) 49% 51%, transparent 52%) 0 0 / 160px 138px,
+      linear-gradient(120deg, transparent 48%, rgba(178, 187, 194, 0.6) 49% 51%, transparent 52%) 0 0 / 160px 138px,
+      #d8dde1;
+  }
+
+  .curso-card-cover-green {
+    background:
+      repeating-linear-gradient(90deg, rgba(21, 117, 91, 0.18) 0 10px, transparent 10px 34px),
+      repeating-linear-gradient(0deg, rgba(25, 124, 94, 0.17) 0 10px, transparent 10px 34px),
+      #4fc19e;
+  }
+
+  .curso-card-cover-blue {
+    background:
+      radial-gradient(circle at 18% 54%, rgba(91, 170, 238, 0.6) 0 22px, transparent 23px),
+      radial-gradient(circle at 60% 15%, rgba(35, 113, 184, 0.45) 0 22px, transparent 23px),
+      radial-gradient(circle at 66% 64%, rgba(25, 104, 178, 0.42) 0 24px, transparent 25px),
+      linear-gradient(135deg, rgba(73, 159, 233, 0.6) 25%, transparent 25%) 0 0 / 88px 88px,
+      #2f8ee2;
+  }
+
+  .curso-card-body {
+    position: relative;
+    min-height: 170px;
+    padding: 18px 44px 16px 16px;
+  }
+
+  .curso-card h3 {
+    margin: 0 0 6px;
+    color: #34678f;
+    font-size: 20px;
+    line-height: 1.45;
+    font-weight: 400;
+  }
+
+  .curso-card p {
+    margin: 0;
+    color: #2f2f2f;
+    font-size: 20px;
+    line-height: 1.3;
+    text-align: left;
+  }
+
+  .curso-menu {
+    position: absolute;
+    right: 16px;
+    bottom: 18px;
+    width: 24px;
+    height: 34px;
+    border: 0;
+    background: transparent;
+    color: #101010;
+    cursor: pointer;
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .doctorado-view {
+    padding: 18px 16px 28px;
+    color: #1f2328;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .doctorado-header {
+    padding-bottom: 18px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .doctorado-header h2 {
+    max-width: 820px;
+    margin: 0;
+    color: #1f2328;
+    font-size: 32px;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  .asignaturas-panel {
+    max-width: 780px;
+    margin-top: 22px;
+  }
+
+  .asignaturas-panel h3 {
+    margin: 0 0 14px;
+    color: #1e4a76;
+    font-size: 24px;
+    line-height: 1.25;
+    font-weight: 700;
+  }
+
+  .asignaturas-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .asignatura-btn {
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #bdcbd8;
+    border-left: 5px solid #1e4a76;
+    border-radius: 6px;
+    background: #fff;
+    color: #263746;
+    cursor: pointer;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: left;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  }
+
+  .asignatura-btn:hover,
+  .asignatura-btn:focus-visible {
+    background: #eef5fb;
+    border-color: #1e4a76;
+    color: #15395c;
+    transform: translateX(3px);
+    outline: none;
+  }
+
+  .sesiones-content {
+    background: #fff;
+  }
+
+  .sesiones-view {
+    max-width: 900px;
+    color: #263746;
+  }
+
+  .sesiones-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 22px;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e1e7ed;
+  }
+
+  .sesiones-header h2 {
+    margin: 0 0 10px;
+    color: #1e4a76;
+    font-size: 28px;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  .sesiones-header p {
+    max-width: 660px;
+    margin: 0;
+    color: #3f4a54;
+    font-size: 14px;
+    line-height: 1.65;
+    text-align: left;
+  }
+
+  .sesiones-logos {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .sesiones-logos img {
+    display: block;
+    max-width: 92px;
+    max-height: 54px;
+    object-fit: contain;
+  }
+
+  .sesiones-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .sesion-link {
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    padding: 12px 16px;
+    border: 1px solid #bdcbd8;
+    border-left: 5px solid #2b74bd;
+    border-radius: 6px;
+    background: #fff;
+    color: #263746;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+    text-decoration: none;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  }
+
+  .sesion-link:hover,
+  .sesion-link:focus-visible {
+    background: #eef5fb;
+    border-color: #1e4a76;
+    color: #15395c;
+    transform: translateX(3px);
+    outline: none;
+  }
+
+  .kit-content {
+    background: #fff;
+  }
+
+  .kit-view {
+    max-width: 860px;
+    color: #263746;
+  }
+
+  .kit-header {
+    padding-bottom: 18px;
+    border-bottom: 1px solid #e1e7ed;
+  }
+
+  .kit-header h2 {
+    margin: 0 0 10px;
+    color: #1e4a76;
+    font-size: 28px;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  .kit-header p {
+    max-width: 680px;
+    margin: 0;
+    color: #3f4a54;
+    font-size: 14px;
+    line-height: 1.65;
+    text-align: left;
+  }
+
+  .kit-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .kit-link {
+    display: flex;
+    align-items: center;
+    min-height: 56px;
+    padding: 12px 16px;
+    border: 1px solid #bdcbd8;
+    border-left: 5px solid #2f7d52;
+    border-radius: 6px;
+    background: #fff;
+    color: #263746;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+    text-decoration: none;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  }
+
+  .kit-link:hover,
+  .kit-link:focus-visible {
+    background: #eef8f2;
+    border-color: #2f7d52;
+    color: #1f5e3e;
+    transform: translateY(-2px);
+    outline: none;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   @media (max-width: 820px) {
     .miunadm-grid {
       grid-template-columns: 1fr;
@@ -625,6 +1085,35 @@
 
     .servicios-card {
       padding: 22px 18px;
+    }
+
+    .cursos-filter-bar,
+    .cursos-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .mis-cursos-header h2 {
+      font-size: 30px;
+    }
+
+    .mis-cursos-header p {
+      font-size: 21px;
+    }
+
+    .doctorado-header h2 {
+      font-size: 27px;
+    }
+
+    .sesiones-header {
+      grid-template-columns: 1fr;
+    }
+
+    .sesiones-logos {
+      justify-content: flex-start;
+    }
+
+    .kit-list {
+      grid-template-columns: 1fr;
     }
 
   }

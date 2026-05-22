@@ -197,6 +197,9 @@
   function generarMenu() {
     const contenedor = document.getElementById('contenedorSemanas');
     contenedor.innerHTML = '';
+    contenedor.classList.add('asignatura-menu-hidden');
+    contenedor.setAttribute('aria-hidden', 'true');
+    document.getElementById('menuBotones')?.classList.add('asignatura-menu-collapsed');
     let currentUnit = 0;
 
     const encuadreBtn = document.createElement('button');
@@ -269,9 +272,18 @@
     
   }
 
+  function crearBreadcrumbAsignatura() {
+    return `<nav class="asignatura-breadcrumb" aria-label="Ruta de navegación">
+      <span>Cursos</span>
+      <span>Doctorado en educación abierta y adistancia</span>
+      <span>El modelo didáctico como eje para la mediación del aprendizaje</span>
+    </nav>`;
+  }
+
   function mostrarEncuadre() {
     const contenedor = document.getElementById('contenidoDinamico');
     contenedor.innerHTML = `<div class="content-body"><div class="content-card">
+      ${crearBreadcrumbAsignatura()}
       <span class="unidad-badge">ENCUADRE</span>
       <h2>Te damos la bienvenida</h2>
       <p>
@@ -289,6 +301,7 @@
   function mostrarEvaluacion() {
     const contenedor = document.getElementById('contenidoDinamico');
     contenedor.innerHTML = `<div class="content-body"><div class="content-card">
+      ${crearBreadcrumbAsignatura()}
       <span class="unidad-badge">EVALUACIÓN</span>
       <h2>Evaluación final de la asignatura</h2>
       <div class="semana-titulo">📅 Semana 20: Cierre evaluativo</div>
@@ -311,6 +324,7 @@
 
     const contenedor = document.getElementById('contenidoDinamico');
     let html = `<div class="content-body"><div class="content-card">
+                    ${crearBreadcrumbAsignatura()}
                     <span class="unidad-badge">UNIDAD ${semana.unidad}</span>
                     <h2>${unidadTitulos[semana.unidad]}</h2>
                     <div class="semana-titulo">📅 Semana ${semana.semana}: ${semana.tituloLimpio}</div>`;
@@ -486,10 +500,195 @@
       }
     });
 
-    contenedor.innerHTML = `<div class="content-body imagen-content">
-      <img class="imagen-fluid" src="cursos.jpg" alt="Mis cursos">
+    contenedor.innerHTML = `<div class="content-body cursos-content">
+      <section class="mis-cursos-view" aria-labelledby="misCursosTitulo">
+        <header class="mis-cursos-header">
+          <h2 id="misCursosTitulo">Mis cursos</h2>
+          <p>Vista general de curso</p>
+          <div class="mis-cursos-actions" aria-label="Acciones de curso">
+            <button type="button" class="curso-btn curso-btn-outline">Gestionar cursos</button>
+            <button type="button" class="curso-btn curso-btn-primary">Crear curso</button>
+          </div>
+        </header>
+
+        <div class="cursos-filter-bar" aria-label="Filtros de cursos">
+          <button type="button" class="curso-select">Todos <span aria-hidden="true">⌄</span></button>
+          <label class="curso-search">
+            <span class="sr-only">Buscar cursos</span>
+            <input type="search" placeholder="Buscar">
+          </label>
+          <button type="button" class="curso-sort">Ordenar por fecha de inicio <span aria-hidden="true">⌄</span></button>
+          <button type="button" class="curso-select">Tarjeta <span aria-hidden="true">⌄</span></button>
+        </div>
+
+        <div class="cursos-grid">
+          <article class="curso-card">
+            <div class="curso-card-cover curso-card-cover-gray" aria-hidden="true"></div>
+            <div class="curso-card-body">
+              <h3>Especialidad en el uso de tecnologías para el ...</h3>
+              <p>Categoría 1</p>
+              <button type="button" class="curso-menu" aria-label="Más opciones de Especialidad en el uso de tecnologías">⋮</button>
+            </div>
+          </article>
+
+          <article class="curso-card">
+            <div class="curso-card-cover curso-card-cover-green" aria-hidden="true"></div>
+            <div class="curso-card-body">
+              <h3>Maestría en ambientes de aprendizaje mediados por ...</h3>
+              <p>Categoría 1</p>
+              <button type="button" class="curso-menu" aria-label="Más opciones de Maestría en ambientes de aprendizaje">⋮</button>
+            </div>
+          </article>
+
+          <a class="curso-card curso-card-link" href="#doctorado-educacion-abierta-distancia" data-course-link="doctorado">
+            <div class="curso-card-cover curso-card-cover-blue" aria-hidden="true"></div>
+            <div class="curso-card-body">
+              <h3>Doctorado en educación abierta y a distancia</h3>
+              <p>Categoría 1</p>
+              <span class="curso-menu" aria-hidden="true">⋮</span>
+            </div>
+          </a>
+        </div>
+      </section>
+    </div>`;
+    const doctoradoLink = contenedor.querySelector('[data-course-link="doctorado"]');
+    if (doctoradoLink) {
+      doctoradoLink.addEventListener('click', event => {
+        event.preventDefault();
+        mostrarDoctoradoAsignaturas();
+      });
+    }
+    contenedor.scrollTop = 0;
+  }
+
+  function mostrarSesionesSincronas() {
+    const contenedor = document.getElementById('contenidoDinamico');
+    const sesiones = [
+      'Sesión 1: Fundamentos de las tecnologías del aprendizaje',
+      'Sesión 2: Entornos y herramientas digitales para el aprendizaje',
+      'Sesión 3: Diseño, mediación y evaluación con tecnologías del aprendizaje',
+      'Sesión 4: Tendencias emergentes y escenarios futuros.'
+    ];
+
+    document.querySelectorAll('.week-button').forEach(btnEl => btnEl.classList.remove('active'));
+    document.querySelectorAll('.unit-header').forEach(btnEl => btnEl.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(btnEl => btnEl.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(btnEl => {
+      if (btnEl.textContent.trim().toLowerCase() === 'sesiones síncronas') {
+        btnEl.classList.add('active');
+      }
+    });
+
+    contenedor.innerHTML = `<div class="content-body sesiones-content">
+      <section class="sesiones-view" aria-labelledby="sesionesTitulo">
+        <header class="sesiones-header">
+          <div>
+            <h2 id="sesionesTitulo">Sesiones síncronas</h2>
+            <p>
+              En este espacio se concentran las sesiones en vivo de la asignatura para
+              acompañar el trabajo académico, resolver dudas y fortalecer la mediación
+              mediante herramientas digitales.
+            </p>
+          </div>
+          <div class="sesiones-logos" aria-label="Plataformas de sesiones síncronas">
+            <img src="logo_teams.png" alt="Microsoft Teams">
+            <img src="bbb_logo.png" alt="BigBlueButton">
+          </div>
+        </header>
+
+        <div class="sesiones-list" aria-label="Listado de sesiones">
+          ${sesiones.map(sesion => `<a class="sesion-link" href="#">${sesion}</a>`).join('')}
+        </div>
+      </section>
     </div>`;
     contenedor.scrollTop = 0;
+  }
+
+  function mostrarKitSupervivencia() {
+    const contenedor = document.getElementById('contenidoDinamico');
+    const recursos = [
+      'Documentos de integridad académica',
+      'Normas de convivencia',
+      'Netiqueta',
+      'Decálogo del estudiante en línea',
+      'Normas de citación',
+      'Orientaciónes para el parendizaje (autogestión)'
+    ];
+
+    document.querySelectorAll('.week-button').forEach(btnEl => btnEl.classList.remove('active'));
+    document.querySelectorAll('.unit-header').forEach(btnEl => btnEl.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(btnEl => btnEl.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(btnEl => {
+      if (btnEl.textContent.trim().toLowerCase() === 'kit de supervivencia') {
+        btnEl.classList.add('active');
+      }
+    });
+
+    contenedor.innerHTML = `<div class="content-body kit-content">
+      <section class="kit-view" aria-labelledby="kitTitulo">
+        <header class="kit-header">
+          <h2 id="kitTitulo">Kit de supervivencia</h2>
+          <p>
+            Reúne recursos esenciales para orientar tu participación académica,
+            fortalecer la comunicación en línea y acompañar el trabajo autónomo
+            durante la asignatura.
+          </p>
+        </header>
+
+        <div class="kit-list" aria-label="Recursos del kit de supervivencia">
+          ${recursos.map(recurso => `<a class="kit-link" href="#">${recurso}</a>`).join('')}
+        </div>
+      </section>
+    </div>`;
+    contenedor.scrollTop = 0;
+  }
+
+  function mostrarDoctoradoAsignaturas() {
+    const contenedor = document.getElementById('contenidoDinamico');
+    const asignaturas = [
+      { texto: 'El modelo didáctico como eje para la mediación del aprendizaje', principal: true },
+      { texto: 'Asignatura 2' },
+      { texto: 'Asignatura 3' },
+      { texto: 'Asignatura 4' }
+    ];
+
+    contenedor.innerHTML = `<div class="content-body cursos-content">
+      <section class="doctorado-view" aria-labelledby="doctoradoTitulo">
+        <header class="doctorado-header">
+          <h2 id="doctoradoTitulo">Doctorado en educación abierta y a distancia</h2>
+        </header>
+
+        <div class="asignaturas-panel" aria-labelledby="asignaturasTitulo">
+          <h3 id="asignaturasTitulo">Asignaturas</h3>
+          <div class="asignaturas-list">
+            ${asignaturas.map(asignatura => `<button type="button" class="asignatura-btn"${asignatura.principal ? ' data-asignatura-principal="true"' : ''}>${asignatura.texto}</button>`).join('')}
+          </div>
+        </div>
+      </section>
+    </div>`;
+    const asignaturaPrincipalBtn = contenedor.querySelector('[data-asignatura-principal="true"]');
+    if (asignaturaPrincipalBtn) {
+      asignaturaPrincipalBtn.addEventListener('click', mostrarMenuAsignatura);
+    }
+    contenedor.scrollTop = 0;
+  }
+
+  function mostrarMenuAsignatura() {
+    const menuAsignatura = document.getElementById('contenedorSemanas');
+    if (!menuAsignatura) return;
+
+    menuAsignatura.classList.remove('asignatura-menu-hidden');
+    menuAsignatura.removeAttribute('aria-hidden');
+    document.getElementById('menuBotones')?.classList.remove('asignatura-menu-collapsed');
+  }
+
+  function ocultarMenuAsignatura() {
+    const menuAsignatura = document.getElementById('contenedorSemanas');
+    if (!menuAsignatura) return;
+
+    menuAsignatura.classList.add('asignatura-menu-hidden');
+    menuAsignatura.setAttribute('aria-hidden', 'true');
+    document.getElementById('menuBotones')?.classList.add('asignatura-menu-collapsed');
   }
 
   // Inicializar
@@ -508,11 +707,19 @@
   }
 
   generarMenu();
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', ocultarMenuAsignatura);
+  });
   document.querySelector('.nav-btn.primary').addEventListener('click', mostrarMiUnADM);
   document.querySelectorAll('.nav-btn').forEach(btn => {
     if (btn.textContent.trim().toLowerCase() === 'mis cursos') {
       btn.addEventListener('click', mostrarMisCursos);
     }
+    if (btn.textContent.trim().toLowerCase() === 'sesiones síncronas') {
+      btn.addEventListener('click', mostrarSesionesSincronas);
+    }
+    if (btn.textContent.trim().toLowerCase() === 'kit de supervivencia') {
+      btn.addEventListener('click', mostrarKitSupervivencia);
+    }
   });
   mostrarMiUnADM();
-
