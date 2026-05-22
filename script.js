@@ -179,17 +179,6 @@
       ],
       actividades: "📑 Entrega final: Documento de estrategias didácticas + Narrativa autobiográfica integradora.",
       evaluacion: "📌 EVALUACIÓN SUMATIVA UNIDAD 3 (Estrategias + Narrativa)"
-    },
-    { semana: 19, unidad: 3, tituloLimpio: "Cierre integrador y reflexión final",
-      temas: [
-          { titulo: "Integración de aprendizajes", subtemas: [
-              "Modelo didáctico en el que se enmarca la práctica de mediación",
-              "Estrategias didácticas para la mejora de la práctica de mediación",
-              "Conclusiones sobre los retos de ser mediador del aprendizaje en la sociedad del conocimiento"
-          ] }
-      ],
-      actividades: "🎓 Sesión sincrónica de cierre. Portafolio reflexivo. Retroalimentación global.",
-      evaluacion: "Evaluación sumativa global / Autoevaluación perfil de egreso."
     }
   ];
 
@@ -260,7 +249,7 @@
     const evaluacionBtn = document.createElement('button');
     evaluacionBtn.type = 'button';
     evaluacionBtn.className = 'unit-header evaluacion-button';
-    evaluacionBtn.innerHTML = `<span class="unit-pin">📌</span><strong>EVALUACIÓN</strong><small>Semana 20</small>`;
+    evaluacionBtn.innerHTML = `<span class="unit-pin">📌</span><strong>EVALUACIÓN</strong><small>Semana 19 y 20</small>`;
     evaluacionBtn.addEventListener('click', () => {
       document.querySelectorAll('.nav-btn').forEach(btnEl => btnEl.classList.remove('active'));
       document.querySelectorAll('.week-button').forEach(btnEl => btnEl.classList.remove('active'));
@@ -304,7 +293,22 @@
       ${crearBreadcrumbAsignatura()}
       <span class="unidad-badge">EVALUACIÓN</span>
       <h2>Evaluación final de la asignatura</h2>
-      <div class="semana-titulo">📅 Semana 20: Cierre evaluativo</div>
+      <div class="semana-titulo">📅 Semana 19 y 20: Cierre integrador y evaluativo</div>
+      <div class="tema-section">
+        <h3>📖 Integración de aprendizajes</h3>
+        <ul class="subtema-list">
+          <li>Modelo didáctico en el que se enmarca la práctica de mediación</li>
+          <li>Estrategias didácticas para la mejora de la práctica de mediación</li>
+          <li>Conclusiones sobre los retos de ser mediador del aprendizaje en la sociedad del conocimiento</li>
+        </ul>
+      </div>
+      <div class="actividades-eval">
+        <strong>📌 Actividades de aprendizaje:</strong>
+        <p>🎓 Sesión sincrónica de cierre. Portafolio reflexivo. Retroalimentación global.</p>
+        <hr>
+        <strong>📊 Evaluación:</strong>
+        <p>Evaluación sumativa global / Autoevaluación perfil de egreso.</p>
+      </div>
       <p>
         En esta etapa se integran las evidencias desarrolladas durante la asignatura para
         valorar el logro de los aprendizajes, la consistencia de las propuestas didácticas
@@ -312,6 +316,9 @@
         evaluación final permite reconocer avances, consolidar criterios académicos y
         proyectar áreas de mejora para la práctica profesional.
       </p>
+      <div class="footer-note cierre-programa">
+        🎓 <strong>Cierre del programa:</strong> Reflexión final sobre el perfil de egreso: "Construye experiencias de aprendizaje mediado considerando contextualización, diseño, implementación y evaluación en entornos virtuales desde perspectiva autocrítica y valoración de diversidades".
+      </div>
       <footer>📚 Programa oficial · Mediación del aprendizaje · Doctorado</footer>
     </div></div>`;
     contenedor.scrollTop = 0;
@@ -377,7 +384,7 @@
       { texto: 'Normatividad', seccion: 'normatividad' },
       { texto: 'Biblioteca digital', seccion: 'biblioteca-digital' },
       'Eventos UnADM',
-      { texto: 'SSAP', seccion: 'ssap' }
+      { texto: 'SSAP - Portafolio', seccion: 'ssap' }
     ];
 
     document.querySelectorAll('.week-button').forEach(btnEl => btnEl.classList.remove('active'));
@@ -607,6 +614,7 @@
   function mostrarKitSupervivencia() {
     const contenedor = document.getElementById('contenidoDinamico');
     const recursos = [
+      'Generador de referencias UnADM',
       'Documentos de integridad académica',
       'Normas de convivencia',
       'Netiqueta',
