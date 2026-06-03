@@ -384,7 +384,7 @@
       { texto: 'Normatividad', seccion: 'normatividad' },
       { texto: 'Biblioteca digital', seccion: 'biblioteca-digital' },
       'Eventos UnADM',
-      { texto: 'SSAP - Portafolio', seccion: 'ssap' }
+      { texto: 'Sistema de seguimiento al aprendizaje y la permanencia / Portafolio', seccion: 'ssap' }
     ];
 
     document.querySelectorAll('.week-button').forEach(btnEl => btnEl.classList.remove('active'));
